@@ -59,7 +59,62 @@ describe('User REST API', () => {
     })
   })
 
-  // describe('GET /user', ()=> {
-  //   // TODO Create test for the get method
-  // })
+  describe('GET /user', () => {
+    // New test: successfully get user
+    it('successfully get user', (done) => {
+      const user = {
+        username: 'sergkudinov',
+        firstname: 'Sergei',
+        lastname: 'Kudinov',
+      };
+
+      // Create the user first
+      chai.request(app)
+        .post('/user')
+        .send(user)
+        .then((res) => {
+          chai.expect(res).to.have.status(201);
+          chai.expect(res.body.status).to.equal('success');
+          chai.expect(res).to.be.json;
+
+          // Now, make a GET request to retrieve the user
+          chai.request(app)
+            .get(`/user/${user.username}`)
+            .then((getRes) => {
+              chai.expect(getRes).to.have.status(200);
+              chai.expect(getRes.body.status).to.equal('success');
+              chai.expect(getRes.body.user).to.deep.equal(user);
+              done();
+            })
+            .catch((err) => {
+              throw err;
+            });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    // New test: cannot get a user when it does not exist
+    it('cannot get a user when it does not exist', function (done) {
+  // Set a longer timeout, for example, 5000ms (5 seconds)
+  this.timeout(10000);
+
+  const nonExistingUsername = 'nonexistentuser';
+  // Make a GET request for a non-existing user
+  chai.request(app)
+    .get(`/user/${nonExistingUsername}`)
+    .then((getRes) => {
+      chai.expect(getRes).to.have.status(404);
+      chai.expect(getRes.body.status).to.equal('error');
+      chai.expect(getRes.body.msg).to.equal('User not found');
+      done();
+    })
+    .catch((err) => {
+      throw err;
+    });
+});
+
+    
+  });
 })
