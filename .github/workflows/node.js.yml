@@ -8,16 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-    # Service containers to run with `container-job`
     services:
-      # Label used to access the service container
       redis:
-        # Docker Hub image
         image: redis
-        # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -29,7 +24,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.17.1]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -41,10 +35,10 @@ jobs:
         cache-dependency-path: labs/lab3/lab/package-lock.json
 
     - run: |
-          if [ -e yarn.lock ]; then
+        if [ -e yarn.lock ]; then
           yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
+        elif [ -e package-lock.json ]; then
           npm ci
-          else
-          npm i
-          fi
+        else
+          npm install
+        fi
