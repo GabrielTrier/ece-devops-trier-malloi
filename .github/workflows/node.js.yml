@@ -33,6 +33,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: labs/lab3/lab/package-lock.json
+        path: labs/lab3/lab
 
     - run: |
         if [ -e yarn.lock ]; then
