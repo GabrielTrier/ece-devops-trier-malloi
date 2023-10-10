@@ -36,11 +36,5 @@ jobs:
         cache-dependency-path: labs/lab3/lab/package-lock.json
         
 
-    - run: |
-        if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-        elif [ -e package-lock.json ]; then
-          npm ci
-        else
-          npm install
-        fi
+    - run: npm ci
+  
