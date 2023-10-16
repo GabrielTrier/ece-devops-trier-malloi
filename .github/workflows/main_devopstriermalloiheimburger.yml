@@ -15,7 +15,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+        with:
+           path: labs/lab3/lab 
+           
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
@@ -31,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: labs/lab3/lab 
 
   deploy:
     runs-on: ubuntu-latest
