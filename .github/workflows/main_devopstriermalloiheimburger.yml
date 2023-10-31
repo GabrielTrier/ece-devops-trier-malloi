@@ -12,12 +12,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+          
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-
+      
       - name: npm install, build, and test
         working-directory: labs/lab3/lab  # Set the working directory for subsequent steps
         run: |
