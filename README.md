@@ -1,6 +1,5 @@
 # User API web application
 
-It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
 
 ## Functionality
 
@@ -18,47 +17,30 @@ This application is written on NodeJS and it uses Redis database.
 
 3. Install application
 
-Go to the root directory of the application (where `package.json` file located) and run:
-
-```
-npm install 
-```
+Go to the root directory of the application (where `package.json` file located) and run: `npm install`
 
 ## Usage
 
 1. Start a web server
 
-From the root directory of the project run:
-
-```
-npm start
-```
+From the root directory of the project run: `npm start`
 
 It will start a web server available in your browser at http://localhost:3000.
 
-2. Create a user
+2. Getting docker image from docker hub
 
-Send a POST (REST protocol) request using terminal:
+link: https://hub.docker.com/r/gabrieltrier/userapi 
 
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"username":"sergkudinov","firstname":"sergei","lastname":"kudinov"}' \
-  http://localhost:3000/user
-```
+command to pull image: `docker pull gabrieltrier/userapi` 
 
-It will output:
+3. Starting application with docker-compose
 
-```
-{"status":"success","msg":"OK"}
-```
+Command : `docker-compose up`
 
-Another way to test your REST API is to use [Postman](https://www.postman.com/).
+Go to http://localhost:5000/ to access it 
 
-## Testing
+## Authors
 
-From the root directory of the project, run:
-
-```
-npm test
-```
+- Gabriel Trier
+- Paul-Antoine Malloi
+- Romain Heimburger
