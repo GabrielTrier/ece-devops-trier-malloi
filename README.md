@@ -3,9 +3,14 @@
 
 ## Functionality
 
-1. Start a web server
-2. Create a user
-2. Get a user
+1. Create a web application
+2. Apply CI/CD pipeline
+3. Run application using the IaC approach
+4. Build Docker image of application
+5. Container orchestration using Docker Compose
+6. Docker orchestration using Kubernetes
+7. Service mesh using Istio
+8. Implementing Monitoring to containerized application
 
 ## Installation
 
@@ -38,6 +43,18 @@ command to pull image: `docker pull gabrieltrier/userapi`
 Command : `docker-compose up`
 
 Go to http://localhost:5000/ to access it 
+
+4. Docker orchestration using Kubernetes
+    Start minikube: `minikube start`.
+    Then you can inside the `\k8s` folder apply the files in the following order: 
+        `kubectl apply -f deployment.yaml`
+        `kubectl apply -f service.yaml`
+        `kubectl apply -f persistentvolume.yaml`
+        `kubectl apply -f persistentvolumeclaim.yaml`
+ ## Links
+
+ ## Images folder
+ Please not that there is an image folder to illustarte functionnal parts of the project `\images`
 
 ## Authors
 
