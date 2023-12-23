@@ -59,7 +59,46 @@ describe('User REST API', () => {
         })
     })
   })
-
+  describe('DELETE /user/:username', () => {
+ 
+    it('delete an existing user', (done) => {
+      const user = {
+        username: 'sergkudinov',
+        firstname: 'Sergei',
+        lastname: 'Kudinov'
+      };
+ 
+      // Create a user
+      userController.create(user, () => {
+        // Delete the user
+        chai.request(app)
+          .delete('/user/' + user.username)
+          .then((res) => {
+            chai.expect(res).to.have.status(200)
+            chai.expect(res.body.status).to.equal('success')
+            chai.expect(res).to.be.json
+            done()
+          })
+          .catch((err) => {
+             throw err
+          })
+      })
+    })
+ 
+    it('try to delete a non-existing user', (done) => {
+      chai.request(app)
+        .delete('/user/nonExistingUser')
+        .then((res) => {
+          chai.expect(res).to.have.status(400)
+          chai.expect(res.body.status).to.equal('error')
+          chai.expect(res).to.be.json
+          done()
+        })
+        .catch((err) => {
+           throw err
+        })
+    })
+  })
   describe('GET /user', () => {
     
     it('get an existing user', (done) => {
@@ -100,3 +139,5 @@ describe('User REST API', () => {
     })
   })
 })
+
+

@@ -40,5 +40,24 @@ userRouter
       resp.status(200).json(respObj)
     })
   })
-  
+  .delete('/:username', (req, resp) => {
+    const username = req.params.username
+    console.log('Deleting user:', username)
+    userController.delete(username, (err, res) => {
+      if (err) {
+        console.error('Error during user deletion:', err)
+        let respObj = {
+          status: 'error',
+          msg: err.message,
+        }
+        return resp.status(400).json(respObj)
+      }
+      console.log('User deleted successfully:', res)
+      let respObj = {
+        status: 'success',
+        msg: res,
+      }
+      resp.status(200).json(respObj)
+    })
+  })
 module.exports = userRouter

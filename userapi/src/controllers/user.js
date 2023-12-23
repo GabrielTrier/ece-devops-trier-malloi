@@ -34,5 +34,21 @@ module.exports = {
       else
         callback(new Error("User doesn't exists"), null)
     })
+  },
+  delete: (username, callback) => {
+    // Check if the user exists
+    db.hgetall(username, (err, res) => {
+      if (err) return callback(err, null)
+      if (res) {
+        // User exists, delete from DB
+        db.del(username, (err, result) => {
+          if (err) return callback(err, null)
+          callback(null, result)
+        })
+      } else {
+        // User not found
+        callback(new Error('User not found'), null)
+      }
+    })
   }
 }

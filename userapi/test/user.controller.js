@@ -13,9 +13,9 @@ describe('User', () => {
 
     it('create a new user', (done) => {
       const user = {
-        username: 'sergkudinov',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        username: 'gabrieltrier',
+        firstname: 'Gabriel',
+        lastname: 'Trier'
       }
       userController.create(user, (err, result) => {
         expect(err).to.be.equal(null)
@@ -26,8 +26,8 @@ describe('User', () => {
 
     it('passing wrong user parameters', (done) => {
       const user = {
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        firstname: 'Gabriel',
+        lastname: 'Trier'
       }
       userController.create(user, (err, result) => {
         expect(err).to.not.be.equal(null)
@@ -38,9 +38,9 @@ describe('User', () => {
 
     it('avoid creating an existing user', (done)=> {
       const user = {
-        username: 'sergkudinov',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        username: 'gabrieltrier',
+        firstname: 'Gabriel',
+        lastname: 'Trier'
       }
       // Create a user
       userController.create(user, () => {
@@ -84,5 +84,31 @@ describe('User', () => {
       })
     })
   
+  })
+  describe('Delete', () => {
+    it('delete an existing user', (done) => {
+      const user = {
+        username: 'sergkudinov',
+        firstname: 'Sergei',
+        lastname: 'Kudinov'
+      };
+      // Create a user
+      userController.create(user, () => {
+        // Delete the existing user
+        userController.delete(user.username, (err, result) => {
+          expect(err).to.be.null
+          expect(result).to.equal(1)
+          done()
+        })
+      })
+    })
+    it('try to delete a non-existing user', (done) => {
+      userController.delete('nonExistentUser', (err, result) => {
+        expect(err).to.not.be.null
+        expect(result).to.be.null
+        expect(err.message).to.equal('User not found')
+        done()
+      })
+    })
   })
 })

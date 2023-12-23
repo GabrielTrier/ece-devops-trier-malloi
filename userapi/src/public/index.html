@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>User Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f8f8;
+      padding-top: 20px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    div {
+      max-width: 400px;
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px; /* Adjusted margin */
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 10px; /* Adjusted padding */
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Management</h1>
+
+  <div>
+    <h2>Create User</h2>
+    <form id="createUserForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" required>
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" required>
+      <button type="button" onclick="createUser()">Create User</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>Get User</h2>
+    <form id="getUserForm">
+      <label for="getUsername">Username:</label>
+      <input type="text" id="getUsername" required>
+      <button type="button" onclick="getUser()">Get User</button>
+    </form>
+  </div>
+  <div>
+    <h2>Delete User</h2>
+    <form id="getUserForm">
+      <label for="getUsername">Username:</label>
+      <input type="text" id="getUsername" required>
+      <button type="button" onclick="deleteUserById()">Delete User</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
