@@ -1,6 +1,6 @@
 # User API web application
 
-We made a web application using JS, HTML and CSS, storing data in a database (Redis) and covered it with tests of different levels. Our application is equiped with CRUD user functionality and unit tests. We added a bonus possibility to delete an user aswell with its units tests. 
+We made a web application using JS, HTML and CSS, storing data in a database (Redis) and covered it with tests of different levels. Our application is equiped with CRUD user functionality and unit tests. We added a bonus possibility to delete a user aswell with its units tests. 
 
 The deployment was made to Microsoft Azure, the CI/CD pipeline using github workflow to automate the integration and the deployment.
 
@@ -8,7 +8,7 @@ Furthermore, we created a Docker image of the application availabe on Docker Hub
 
 The virtual environment was made with Ansible (configuring and provisioning 1 VM on any linux distribution). 
 
-Finally deployment using Istio (route requets and traffic shifting between 2 versions of the application) and monitoring with Grafana and Prometheus of the k8s clusters.
+Finally deployment using Istio (route requets and traffic shifting between 2 versions of the application) and monitoring with Grafana and Prometheus of the k8s clusters (CPU and memory usage)!
 
 # Functionality
 
@@ -75,14 +75,12 @@ Then you can inside the `\k8s` folder apply the files in the following order:
     kubectl apply -f service.yaml
     kubectl apply -f persistentvolume.yaml
     kubectl apply -f persistentvolumeclaim.yaml
-## 6. Istio 
+## 6. Monitoring with Prometheus and Grafana
 
-## 7. Monitoring with Prometheus and Grafana
-
-Navigate to the k8 folder to apply all files (just like in section 5) aswell as the `servicemonitor.yaml`: 
+Navigate to the k8 folder to apply all files (just like in section 5) plus the `servicemonitor.yaml`: 
     kubectl apply -f servicemonitor.yaml
 
-To access prometheus on the web: `kubectl port-forward service/prometheus-server 9090:80` . 
+To access prometheus on the web: `kubectl port-forward service/prometheus-server 9090:80`. 
 
 Then, you can access the Prometheus dashboard at http://localhost:9090.
 
@@ -90,9 +88,9 @@ To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
 
 Then, you can access the Grafana dashboard at http://localhost:3000.
 
-In order to test make sure that Grafana and Pormetheus are installed on your k8s clusters. 
+In order to test you need to make sure that Grafana and Prometheus are installed on your k8s clusters. 
 
-We are able to monitor CPU and memory usage through a dashboard visible in the `\images` folder. 
+We are able to monitor CPU and memory usage through a dashboard visible in the `\images` folder. Furthermore an alert was put in place in Grafana to test if the application is down or not. The query for the alert is : `up{job="userapi-service"}` and the condition: `WHEN avg() OF query(A, 1m, now) IS BELOW 1`. You can see that it was triggered in the `\images` folder with its firing state. 
  ## Links
 - Docker hub link: https://hub.docker.com/r/gabrieltrier/userapi
 - Microsoft Azure acces point: https://devopstriermalloiheimburger.azurewebsites.net/
