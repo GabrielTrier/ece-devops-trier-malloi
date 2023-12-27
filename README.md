@@ -1,6 +1,6 @@
 # User API web application
 
-We made a web application using JS, HTML and CSS, storing data in a database (Redis) and covered it with tests of different levels. Our application is equiped with CRUD user functionality and unit tests.
+We made a web application using JS, HTML and CSS, storing data in a database (Redis) and covered it with tests of different levels. Our application is equiped with CRUD user functionality and unit tests. We added a bonus possibility to delete an user aswell with its units tests. 
 
 The deployment was made to Microsoft Azure, the CI/CD pipeline using github workflow to automate the integration and the deployment.
 
@@ -91,13 +91,14 @@ To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
 Then, you can access the Grafana dashboard at http://localhost:3000.
 
 In order to test make sure that Grafana and Pormetheus are installed on your k8s clusters. 
+
+We are able to monitor CPU and memory usage through a dashboard visible in the `\images` folder. 
  ## Links
 - Docker hub link: https://hub.docker.com/r/gabrieltrier/userapi
 - Microsoft Azure acces point: https://devopstriermalloiheimburger.azurewebsites.net/
 
 ## Images folder
  Please note that there is an image folder to illustrate functionnal parts of the project `\images`.
-
 ## Authors
 
 - Gabriel Trier
