@@ -58,9 +58,9 @@ describe('User', () => {
 
     it('get a user by username', (done) => {
       const user = {
-        username: 'sergkudinov',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        username: 'gabrieltrier',
+        firstname: 'Gabriel',
+        lastname: 'Trier'
       }
       // Create a user
       userController.create(user, () => {
@@ -68,8 +68,8 @@ describe('User', () => {
         userController.get(user.username, (err, result) => {
           expect(err).to.be.equal(null)
           expect(result).to.be.deep.equal({
-            firstname: 'Sergei',
-            lastname: 'Kudinov'
+            firstname: 'Gabriel',
+            lastname: 'Trier'
           })
           done()
         })
@@ -88,9 +88,9 @@ describe('User', () => {
   describe('Delete', () => {
     it('delete an existing user', (done) => {
       const user = {
-        username: 'sergkudinov',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        username: 'gabrieltrier',
+        firstname: 'Gabriel',
+        lastname: 'Trier'
       };
       // Create a user
       userController.create(user, () => {

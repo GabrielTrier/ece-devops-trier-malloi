@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: userapi-service
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: userapi
+  endpoints:
+  - port: http
+    interval: 15s

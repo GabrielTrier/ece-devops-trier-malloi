@@ -75,7 +75,22 @@ Then you can inside the `\k8s` folder apply the files in the following order:
     kubectl apply -f service.yaml
     kubectl apply -f persistentvolume.yaml
     kubectl apply -f persistentvolumeclaim.yaml
+## 6. Istio 
 
+## 7. Monitoring with Prometheus and Grafana
+
+Navigate to the k8 folder to apply all files (just like in section 5) aswell as the `servicemonitor.yaml`: 
+    kubectl apply -f servicemonitor.yaml
+
+To access prometheus on the web: `kubectl port-forward service/prometheus-server 9090:80` . 
+
+Then, you can access the Prometheus dashboard at http://localhost:9090.
+
+To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
+
+Then, you can access the Grafana dashboard at http://localhost:3000.
+
+In order to test make sure that Grafana and Pormetheus are installed on your k8s clusters. 
  ## Links
 - Docker hub link: https://hub.docker.com/r/gabrieltrier/userapi
 - Microsoft Azure acces point: https://devopstriermalloiheimburger.azurewebsites.net/
