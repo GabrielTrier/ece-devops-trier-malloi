@@ -86,7 +86,7 @@ After installation, start Redis server:
 From the root directory of the project run: `npm test`. 
 
 <img src="images/LauchingApp-proof/test2.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
-<img src="images/LauchingApp-proof/test3.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
+<img src="images/LauchingApp-proof/test3.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
 
 ## 3. Getting docker image from docker hub
 
@@ -106,12 +106,12 @@ Go to http://localhost:5000/ to access it.
 
 Start minikube: `minikube start`.
 Then you can inside the `\k8s` folder apply the files in the following order: 
-
+```
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 kubectl apply -f persistentvolume.yaml
 kubectl apply -f persistentvolumeclaim.yaml
-
+```
 ![Applying files](images/K8s-proof/applyk8s.png)
 
 ## 6. Istio 
@@ -137,8 +137,9 @@ To access prometheus on the web: `kubectl port-forward service/prometheus-server
 
 Then, you can access the Prometheus dashboard at http://localhost:9090.
 
-<img src="images/Monitoring/prometheuszoomed.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
-<img src="images/Monitoring/prometheus4.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
+<img src="images/Monitoring/prometheuszoomed.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
+
+<img src="images/Monitoring/prometheus4.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
 
 To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
 
