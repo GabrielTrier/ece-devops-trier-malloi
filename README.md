@@ -78,15 +78,15 @@ After installation, start Redis server:
 - Windows: double click on `redis-server.exe` file (keep it open in another tab)
 - MacOS and Linux: `redis-server`
 
-![Web app](images/LauchingApp-proof/webapp.png)
-![Web app](images/LauchingApp-proof/webapp2.png)
+![Web app](images/LauchingApp-proof/webapp.png){:width="50%"}
+![Web app](images/LauchingApp-proof/webapp2.png){:width="50%"}
 
 ## 2. Test the app
 
 From the root directory of the project run: `npm test`. 
 
 ![Test app](images/LauchingApp-proof/test2.png)
-![Test app](images/LauchingApp-proof/test3.png)
+![Test app](images/LauchingApp-proof/test3.png){:width="50%"}
 
 ## 3. Getting docker image from docker hub
 
@@ -131,14 +131,14 @@ Afterwards you can apply the `userapi.yaml`file that permits to define the deplo
 In order to test make sure that Grafana and Prometheus are installed on your k8s clusters. 
 
 Navigate to the k8 folder to apply all files (just like in section 5) aswell as the `servicemonitor.yaml`: 
-kubectl apply -f servicemonitor.yaml
+`kubectl apply -f servicemonitor.yaml`
 
 To access prometheus on the web: `kubectl port-forward service/prometheus-server 9090:80` . 
 
 Then, you can access the Prometheus dashboard at http://localhost:9090.
 
-![Prometheus dashboard](images/Monitoring/prometheuszoomed.png)
-![Prometheus infos](images/Monitoring/prometheus4.png)
+![Prometheus dashboard](images/Monitoring/prometheuszoomed.png){:width="50%"}
+![Prometheus infos](images/Monitoring/prometheus4.png){:width="50%"}
 
 To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
 
