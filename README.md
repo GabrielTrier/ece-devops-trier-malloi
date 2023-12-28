@@ -78,15 +78,15 @@ After installation, start Redis server:
 - Windows: double click on `redis-server.exe` file (keep it open in another tab)
 - MacOS and Linux: `redis-server`
 
-<img src="images/LauchingApp-proof/webapp.png" alt="ImageAltText" width="50%">
-<img src="images/LauchingApp-proof/webap2.png" alt="ImageAltText" width="50%">
+<img src="images/LauchingApp-proof/webapp.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
+<img src="images/LauchingApp-proof/webapp2.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
 
 ## 2. Test the app
 
 From the root directory of the project run: `npm test`. 
 
-<img src="images/LauchingApp-proof/test2.png" alt="ImageAltText" width="50%">
-<img src="images/LauchingApp-proof/test3.png" alt="ImageAltText" width="50%">
+<img src="images/LauchingApp-proof/test2.png" alt="ImageAltText" width="50%" style="display: block; margin: 0 auto;">
+<img src="images/LauchingApp-proof/test3.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
 
 ## 3. Getting docker image from docker hub
 
@@ -137,8 +137,8 @@ To access prometheus on the web: `kubectl port-forward service/prometheus-server
 
 Then, you can access the Prometheus dashboard at http://localhost:9090.
 
-<img src="images/Monitoring/prometheuszoomed.png" alt="ImageAltText" width="50%">
-<img src="mages/Monitoring/prometheus4.png" alt="ImageAltText" width="50%">
+<img src="images/Monitoring/prometheuszoomed.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
+<img src="images/Monitoring/prometheus4.png" alt="ImageAltText" width="50%"style="display: block; margin: 0 auto;">
 
 To access Grafana on the web: `kubectl port-forward service/grafana 3000:80`
 
