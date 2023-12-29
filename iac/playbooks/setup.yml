@@ -2,53 +2,60 @@
 - hosts: all
   become: yes
   tasks:
-  - name: Update APT package cache
-    apt:
-      update_cache: yes
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
 
-  - name: Install build-essential, git, and curl
-    apt:
-      name: 
-        - build-essential
-        - git
-        - curl
+    - name: Install build-essential, git, and curl
+      apt:
+        name: 
+          - build-essential
+          - git
+          - curl
 
-  - name: Install Node.js using n-install
-    shell: |
-      curl -L https://git.io/n-install | bash
-    args:
-      creates: /etc/profile.d/n-install.sh
+    - name: Install Node.js, pm2 using Node Version Manager (NVM) and Install 'userapi' application dependencies
+      shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+        nvm install 14
+        nvm use 14
+        npm install
+        npm install pm2
+      args:
+        chdir: /home/vagrant/userapi/
 
-  - name: Install Redis (your chosen database)
-    apt:
-      name: redis-server
-      state: latest
-    notify:
-    - start redis
+    - name: Install Redis 
+      apt:
+        name: redis-server
+        state: latest
+      notify:
+        - start redis
 
-  - name: Copy your 'userapi' application files
-    copy:
-      src: ../userapi/
-      dest: /home/vagrant/userapi/
-      recursive: yes
+    - name: Start 'userapi' Node.js application
+      shell: |
+        . ~/.nvm/nvm.sh
+        nvm use 14
+        ./node_modules/.bin/pm2 start npm -- start
+      args:
+        chdir: /home/vagrant/userapi/
 
-  - name: Install 'userapi' application dependencies
-    npm:
-      path: "/home/vagrant/userapi/"
+    - name: Wait for 'userapi' application to start
+      wait_for:
+        host: localhost
+        port: 3000
+        delay: 10  
+        timeout: 60  
 
-  - name: Start your 'userapi' Node.js application
-    command: npm start
-    args:
-      chdir: /home/vagrant/userapi/
-
-  - name: Check if 'userapi' application is running (health check)
-    uri:
-      url: http://localhost:3000/health
-      status_code: 200
+    - name: Check if 'userapi' application is running (health check)
+      uri:
+        url: http://localhost:3000/
+        status_code: 200
 
   handlers:
-  - name: start redis
-    service:
-      name: redis-server
-      state: started
-      enabled: yes
+    - name: start redis
+      service:
+        name: redis-server
+        state: started
+        enabled: yes

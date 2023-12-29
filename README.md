@@ -6,7 +6,7 @@ The deployment was made to Microsoft Azure, the CI/CD pipeline using github work
 
 Furthermore, we created a Docker image of the application availabe on Docker Hub and Docker Compose to start our application. The Docker Orchestration was made with Kubernetes (including deployments, services, pv and pvc).
 
-The virtual environment was made with Ansible (configuring and provisioning 1 VM on any linux distribution). 
+The virtual environment was made with Ansible (configuring and provisioning 1 VM on any linux distribution whilst verying the health of our application). 
 
 Finally deployment using Istio (route requets and traffic shifting between 2 versions of the application) and monitoring with Grafana and Prometheus of the k8s clusters.
 
@@ -25,7 +25,7 @@ Here is the recap of the different functionnalities that were implemented:
 
 # Installation
 
-This application is written on NodeJS and it uses Redis database. Here are all elements installed throughout the project: 
+This application is written on NodeJS and it uses Redis database. Here are all elements installed throughout the project and that need to be installed in order to work: 
 
 1. [Install NodeJS](https://nodejs.org/en/download/)
 
@@ -37,8 +37,8 @@ This application is written on NodeJS and it uses Redis database. Here are all e
 (Optional) **On Windows**, ensure that Hyper-V is disabled:
 - Open a new PowerShell.
 - Run the following command: 
+    `Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All`
 
-`Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All`
 5. Install [Docker Desktop](https://www.docker.com/get-started) following the instructions depending on your OS.
 
 Make sure your docker installation is working properly by running the following command in a terminal:
@@ -56,8 +56,9 @@ Verify that everything is OK with:
 minikube status
 ```
 7. [Download Istio](https://istio.io/docs/setup/getting-started/)
-8. [Prometheus] (https://istio.io/latest/docs/ops/integrations/prometheus/)
-[Grafana] (https://istio.io/latest/docs/ops/integrations/grafana/)
+
+8. [Prometheus](https://istio.io/latest/docs/ops/integrations/prometheus/) & [Grafana] (https://istio.io/latest/docs/ops/integrations/grafana/)
+
 9. Install application
 
 Go to the root directory of the application (where `package.json` file located) and run: `npm install`
@@ -98,11 +99,35 @@ It is still necessary to have redis running in another tab!
 
 ## 4. Starting application with docker-compose
 
+Navigate to the `\iac` folder before doing any commmands.
+
+Create a Virtual Machine (VM) with the following command: `vagrant up`.
+
+This will open and create a VM just like below:
+
+![VM](images/Iac/VMopened.png)
+
+After you can enter for the username and password: `vagrant`.
+
+![VM](images/Iac/VMworking.png)
+
+Now with `vagrant provision` you can provision the VM with Ansible, which includes installing and running:
+  - language runtime
+  - database
+  - your application (use [sync folders](https://www.vagrantup.com/docs/synced-folders))
+  - health check of your application
+
+It should display that all tasks are succesfull!
+
+![VM](images/Iac/provisionningsmaller.png)
+
+## 5. Starting application with docker-compose
+
 Command to launch the app with all dependencies : `docker-compose up`.
 
 Go to http://localhost:5000/ to access it. 
 
-## 5. Docker orchestration using Kubernetes
+## 6. Docker orchestration using Kubernetes
 
 Start minikube: `minikube start`.
 Then you can inside the `\k8s` folder apply the files in the following order: 
@@ -114,7 +139,7 @@ kubectl apply -f persistentvolumeclaim.yaml
 ```
 ![Applying files](images/K8s-proof/applyk8s.png)
 
-## 6. Istio 
+## 7. Istio 
 
 Make sure that minikube is started : `minikube start` and that Istio is installed with istoctl client added to your path: `$ export PATH=$PWD/bin:$PATH`
 
@@ -126,7 +151,7 @@ Afterwards you can apply the `userapi.yaml`file that permits to define the deplo
 
 ![Istio setup](images/Istio-proof/part2.png)
 
-## 7. Monitoring with Prometheus and Grafana
+## 8. Monitoring with Prometheus and Grafana
 
 In order to test make sure that Grafana and Prometheus are installed on your k8s clusters. 
 
@@ -156,7 +181,7 @@ We are able to monitor CPU and memory usage through a dashboard visible in the `
 - Microsoft Azure acces point: https://devopstriermalloiheimburger.azurewebsites.net/
 
 ## Images folder
-Please note that there is an image folder `\images` to illustrate functionnal parts of the project and more detailed screenshots to results obtained. 
+Please note that there is an image folder `\images` to illustrate functionnal parts of the project and more detailed screenshots to the results obtained. 
 ## Authors
 
 - Gabriel Trier
