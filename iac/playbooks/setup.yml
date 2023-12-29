@@ -28,7 +28,7 @@
 
   - name: Copy your 'userapi' application files
     copy:
-      src: /vagrant/userapi/
+      src: ../userapi/
       dest: /home/vagrant/userapi/
       recursive: yes
 
